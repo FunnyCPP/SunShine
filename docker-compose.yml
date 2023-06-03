@@ -1,7 +1,28 @@
-version: "2"
+version: '3.8'
+
+networks:
+  proxynet:
+    name: sunshine-platform
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
 
 services:
+  nginx:
+    hostname: nginx
+    container_name: nginx
+    image: nginx:1.13
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - authorization-service
+    networks:
+      - proxynet
   authorization-service:
+    hostname: authorization-service
     image: 'sunshine/authorization-service'
     container_name: authorization-service
     depends_on:
@@ -11,25 +32,14 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    networks:
-      - sunshine-network
     ports:
-      - "8888"
-
-  items-service:
-    image: 'sunshine/items-service'
-    container_name: items-service
-    depends_on:
-      - postgres
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - "8080:8080"
+    expose:
+      - 8080
+    stdin_open: true
+    tty: true
     networks:
-      - sunshine-network
-    ports:
-      - "8080"
+      - proxynet
 
   postgres:
     image: 'postgres:13.1-alpine'
@@ -38,12 +48,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-    networks:
-      - sunshine-network
     ports:
       - "5432:5432"
     stdin_open: true
     tty: true
-
-networks:
-  sunshine-network:
+    networks:
+      - proxynet
