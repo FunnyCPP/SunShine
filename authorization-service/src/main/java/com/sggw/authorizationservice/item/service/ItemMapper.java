@@ -20,7 +20,7 @@ public class ItemMapper {
         itemViewModel.setDescription(item.getDescription());
         itemViewModel.setPurchasingDate(item.getPurchasingDate());
         itemViewModel.setScrappingDate(item.getScrappingDate());
-
+        itemViewModel.setCode(item.getCode());
         return itemViewModel;
     }
 
@@ -32,6 +32,7 @@ public class ItemMapper {
         item.setDescription(itemDTO.getDescription());
         item.setPurchasingDate(itemDTO.getPurchasingDate());
         item.setScrappingDate(itemDTO.getScrappingDate());
+        item.setCode(itemDTO.getCode());
         return item;
     }
 }
