@@ -1,12 +1,5 @@
 version: '3.3'
 
-networks:
-  proxynet:
-    ipam:
-      config:
-        - subnet: 172.30.0.0/24
-          gateway: 172.30.0.1
-
 services:
   nginx:
     hostname: nginx
@@ -18,8 +11,6 @@ services:
       - "554:554"
     depends_on:
       - authorization-service
-    networks:
-      - proxynet
   authorization-service:
     hostname: authorization-service
     image: 'sunshine/authorization-service'
@@ -37,8 +28,6 @@ services:
       - 8080
     stdin_open: true
     tty: true
-    networks:
-      - proxynet
 
   postgres:
     image: 'postgres:13.1-alpine'
@@ -51,5 +40,3 @@ services:
       - "5432:5432"
     stdin_open: true
     tty: true
-    networks:
-      - proxynet
