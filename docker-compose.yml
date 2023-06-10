@@ -1,8 +1,7 @@
-version: '3.8'
+version: '3.3'
 
 networks:
   proxynet:
-    name: sunshine-platform
     ipam:
       config:
         - subnet: 172.30.0.0/24
