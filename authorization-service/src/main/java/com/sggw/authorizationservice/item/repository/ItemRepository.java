@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-    List<Item> getAllByRoomAndHouse(String room, String house);
+    List<Item> getAllByHouseAndRoom(String house, String room);
+
+    Item findItemByCode(String code);
 }

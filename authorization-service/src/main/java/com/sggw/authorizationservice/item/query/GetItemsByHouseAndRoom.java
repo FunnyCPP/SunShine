@@ -1,6 +1,5 @@
 package com.sggw.authorizationservice.item.query;
 
-import com.sggw.authorizationservice.item.entity.Item;
 import com.sggw.authorizationservice.item.repository.ItemRepository;
 import com.sggw.authorizationservice.item.service.ItemMapper;
 import com.sggw.authorizationservice.item.viewmodel.ItemViewModel;
@@ -11,14 +10,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GetItemsQuery {
-
+public class GetItemsByHouseAndRoom {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
 
-    public List<ItemViewModel> handle() {
-        return itemRepository.findAll().stream().map(itemMapper::mapItemToViewModel).toList();
+    public List<ItemViewModel> handle(String house, String room) {
+        return itemRepository.getAllByHouseAndRoom(house,room).stream().map(itemMapper::mapItemToViewModel).toList();
     }
-
-
 }
