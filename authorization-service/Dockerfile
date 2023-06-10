@@ -33,6 +33,6 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
 
 WORKDIR /app
 
-COPY /target/authorization-service-0.0.1-SNAPSHOT.jar /app/
+COPY /authorization-service-0.0.1-SNAPSHOT.jar /app/
 
 ENTRYPOINT ["java", "-jar", "authorization-service-0.0.1-SNAPSHOT.jar"]
