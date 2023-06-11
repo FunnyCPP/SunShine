@@ -58,7 +58,7 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    @GetMapping("/{code}")
+    @GetMapping("/code/{code}")
     public ResponseEntity<ItemViewModel> getItemByCode(@PathVariable String code) {
         ItemViewModel item = getItemByCodeQuery.handle(code);
         return ResponseEntity.ok(item);
