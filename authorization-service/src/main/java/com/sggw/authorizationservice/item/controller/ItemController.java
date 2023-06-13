@@ -63,7 +63,7 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    @GetMapping("/bootstrap}")
+    @GetMapping("/bootstrap")
     public ResponseEntity<BootstrapViewModel> getItem() {
         return ResponseEntity.ok(getBootstrapQuery.handle());
     }
