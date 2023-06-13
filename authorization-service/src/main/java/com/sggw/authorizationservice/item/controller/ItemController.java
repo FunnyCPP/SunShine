@@ -2,10 +2,8 @@ package com.sggw.authorizationservice.item.controller;
 
 import com.sggw.authorizationservice.item.command.CreateItemCommand;
 import com.sggw.authorizationservice.item.dto.ItemDTO;
-import com.sggw.authorizationservice.item.query.GetItemByCodeQuery;
-import com.sggw.authorizationservice.item.query.GetItemQuery;
-import com.sggw.authorizationservice.item.query.GetItemsByHouseAndRoom;
-import com.sggw.authorizationservice.item.query.GetItemsQuery;
+import com.sggw.authorizationservice.item.query.*;
+import com.sggw.authorizationservice.item.viewmodel.BootstrapViewModel;
 import com.sggw.authorizationservice.item.viewmodel.ItemViewModel;
 import com.sggw.authorizationservice.item.viewmodel.ItemsResponse;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -26,6 +24,7 @@ public class ItemController {
     private final GetItemQuery getItemQuery;
     private final GetItemByCodeQuery getItemByCodeQuery;
     private final CreateItemCommand createItemCommand;
+    private final GetBootstrapQuery getBootstrapQuery;
 
     @GetMapping
     public ResponseEntity<ItemsResponse> getItems(
@@ -62,5 +61,10 @@ public class ItemController {
     public ResponseEntity<ItemViewModel> getItemByCode(@PathVariable String code) {
         ItemViewModel item = getItemByCodeQuery.handle(code);
         return ResponseEntity.ok(item);
+    }
+
+    @GetMapping("/bootstrap}")
+    public ResponseEntity<BootstrapViewModel> getItem() {
+        return ResponseEntity.ok(getBootstrapQuery.handle());
     }
 }

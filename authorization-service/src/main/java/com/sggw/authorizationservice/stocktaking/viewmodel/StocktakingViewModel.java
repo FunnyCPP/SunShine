@@ -25,7 +25,7 @@ public class StocktakingViewModel {
     @JsonProperty("room")
     private String room;
 
-    @JsonProperty("createdAt")
+    @JsonProperty("created_at")
     private Date createdAt;
 
     @JsonProperty("required_items")
