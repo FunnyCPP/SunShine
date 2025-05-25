@@ -22,6 +22,7 @@ public class SecurityApplication {
 			AuthenticationService service
 	) {
 		return args -> {
+
 			/*var admin = RegisterRequest.builder()
 					.firstname("Admin")
 					.lastname("Admin")
